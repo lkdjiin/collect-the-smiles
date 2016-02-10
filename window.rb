@@ -45,6 +45,7 @@ class Window < Gosu::Window
     @player.go_left if Gosu::button_down?(Gosu::KbLeft)
     @player.go_right if Gosu::button_down?(Gosu::KbRight)
     @player.move
+    @player.collect(@items)
   end
 
 end
