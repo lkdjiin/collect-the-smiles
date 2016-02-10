@@ -1,7 +1,8 @@
 class Smiley
-  attr_reader :x, :y
+  attr_reader :x, :y, :type
 
   def initialize(type)
+    @type = type
     @image = if type == :smiley_up
                Gosu::Image.new("assets/images/smiley-yellow.png")
              elsif type == :smiley_down
