@@ -22,10 +22,6 @@ class Smiley
     @image.draw(@x, @y, ZOrder::Items)
   end
 
-  def width
-    @image.width
-  end
-
   def x_center_of_mass
     @x + @image.width / 2
   end

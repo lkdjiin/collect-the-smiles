@@ -7,6 +7,7 @@ class Window < Gosu::Window
     @background_image = Gosu::Image.new("assets/images/background.png")
 
     @player = Player.new
+    @ui = UI.new
 
     @items = []
   end
@@ -20,6 +21,7 @@ class Window < Gosu::Window
     @background_image.draw(0, 0, ZOrder::Background)
     @items.each(&:draw)
     @player.draw
+    @ui.draw(score: @player.score)
   end
 
   private
