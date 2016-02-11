@@ -61,6 +61,7 @@ class Player
       @score += 10
       @sound_collect.play(1.0)
     when :smiley_down
+      @lives -= 1
       @sound_life_lost.play(1.0)
     end
 
