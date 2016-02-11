@@ -21,7 +21,7 @@ class Window < Gosu::Window
     @background_image.draw(0, 0, ZOrder::Background)
     @items.each(&:draw)
     @player.draw
-    @ui.draw(score: @player.score)
+    @ui.draw(@player)
   end
 
   private

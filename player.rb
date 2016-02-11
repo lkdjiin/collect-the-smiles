@@ -5,7 +5,7 @@ class Player
   SkidingFactor = 0.96
   DistanceOfCollision = 35
 
-  attr_reader :score
+  attr_reader :score, :lives
 
   def initialize
     @x = WindowHeight / 2
@@ -14,6 +14,7 @@ class Player
     @sound_collect = Gosu::Sample.new("assets/sound/collect.wav")
     @sound_life_lost = Gosu::Sample.new("assets/sound/life-lost.wav")
     @score = 0
+    @lives = 3
   end
 
   def draw
