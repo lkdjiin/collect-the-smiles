@@ -17,6 +17,8 @@ class Window < Gosu::Window
   end
 
   def update
+    return if @player.just_lost_a_life?
+
     update_items
     update_player
   end

@@ -4,6 +4,7 @@ class Player
   AccelerationFactor = 0.5
   SkidingFactor = 0.96
   DistanceOfCollision = 35
+  LifeLostPause = 1500
 
   attr_reader :score, :lives
 
@@ -15,6 +16,7 @@ class Player
     @sound_life_lost = Gosu::Sample.new("assets/sound/life-lost.wav")
     @score = 0
     @lives = 3
+    @lost_life_at = -20_000
   end
 
   def draw
@@ -37,6 +39,10 @@ class Player
 
   def collect(items)
     items.reject! {|item| collide?(item) ? collision(item.type) : false }
+  end
+
+  def just_lost_a_life?
+    Gosu::milliseconds - @lost_life_at < LifeLostPause
   end
 
   private
@@ -63,6 +69,7 @@ class Player
     when :smiley_down
       @lives -= 1
       @sound_life_lost.play(1.0)
+      @lost_life_at = Gosu::milliseconds
     end
 
     true
