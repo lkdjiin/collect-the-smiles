@@ -14,10 +14,13 @@ class Window < Gosu::Window
     @song = Gosu::Song.new("assets/songs/Around the Bend.ogg")
     @song.volume = 0.25
     @song.play(true)
+
+    @game_over = false
   end
 
   def update
     return if @player.just_lost_a_life?
+    return if @game_over
 
     update_items
     update_player
@@ -27,7 +30,7 @@ class Window < Gosu::Window
     @background_image.draw(0, 0, ZOrder::Background)
     @items.each(&:draw)
     @player.draw
-    @ui.draw(@player)
+    @ui.draw(game_state)
   end
 
   private
@@ -54,6 +57,15 @@ class Window < Gosu::Window
     @player.go_right if Gosu::button_down?(Gosu::KbRight)
     @player.move
     @player.collect(@items)
+    @game_over = true if @player.lives <= 0
+  end
+
+  def game_state
+    {
+      score: @player.score,
+      lives: @player.lives,
+      game_over: @game_over,
+    }
   end
 
 end

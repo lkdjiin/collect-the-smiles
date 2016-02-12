@@ -16,6 +16,10 @@ class Player
     @sound_life_lost = Gosu::Sample.new("assets/sound/life-lost.wav")
     @score = 0
     @lives = 3
+
+    # It's important to note that this value is necessary for the game
+    # to avoid to freeze at startup.
+    # −20_000 is an arbitrary value. One can use -9999 or -5000 instead.
     @lost_life_at = -20_000
   end
 

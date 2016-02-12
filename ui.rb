@@ -9,12 +9,14 @@ class UI
 
   def initialize
     @font = Gosu::Font.new(20, name: "assets/fonts/VT323/VT323-Regular.ttf")
+    @big_font = Gosu::Font.new(80, name: "assets/fonts/VT323/VT323-Regular.ttf")
     @heart = Gosu::Image.new("assets/images/heart.gif")
   end
 
-  def draw(player)
-    draw_score(player.score)
-    draw_lives(player.lives)
+  def draw(game)
+    draw_score(game[:score])
+    draw_lives(game[:lives])
+    draw_game_over if game[:game_over]
   end
 
   private
@@ -28,5 +30,12 @@ class UI
     number.times do |index|
       @heart.draw(LivesXShift * index + LivesX, LivesY, ZOrder::UI)
     end
+  end
+
+  def draw_game_over
+    @big_font.draw_rel("Game Over",
+                       WindowWidth / 2, WindowHeight / 2,
+                       ZOrder::UI,
+                       0.5, 0.5)
   end
 end
