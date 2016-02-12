@@ -10,6 +10,10 @@ class Window < Gosu::Window
     @ui = UI.new
 
     @items = []
+
+    @song = Gosu::Song.new("assets/songs/Around the Bend.ogg")
+    @song.volume = 0.25
+    @song.play(true)
   end
 
   def update
