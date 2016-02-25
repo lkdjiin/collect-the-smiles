@@ -21,10 +21,20 @@ class Player
     # to avoid to freeze at startup.
     # −20_000 is an arbitrary value. One can use -9999 or -5000 instead.
     @lost_life_at = -20_000
+
+    @angle = 0.0
+  end
+
+  def update(items)
+    just_lost_a_life? ? update_angle : update_general(items)
   end
 
   def draw
-    @image.draw(@x, Y, ZOrder::Player)
+    if just_lost_a_life?
+      @image.draw_rot(x_middle, y_middle, ZOrder::Player, @angle)
+    else
+      @image.draw(@x, Y, ZOrder::Player)
+    end
   end
 
   def go_left
@@ -60,9 +70,14 @@ class Player
   def x_center_of_mass
     @x + @image.width / 2
   end
+  alias_method :x_middle, :x_center_of_mass
 
   def y_center_of_mass
     Y + @image.height / 4
+  end
+
+  def y_middle
+    Y + @image.height / 2
   end
 
   def collision(type)
@@ -77,6 +92,17 @@ class Player
     end
 
     true
+  end
+
+  def update_angle
+    @angle += 10
+  end
+
+  def update_general(items)
+    go_left if Button.left?
+    go_right if Button.right?
+    move
+    collect(items)
   end
 
 end

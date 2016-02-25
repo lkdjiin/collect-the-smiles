@@ -19,7 +19,6 @@ class Window < Gosu::Window
   end
 
   def update
-    return if @player.just_lost_a_life?
     return if @game_over
 
     update_items
@@ -36,6 +35,8 @@ class Window < Gosu::Window
   private
 
   def update_items
+    return if @player.just_lost_a_life?
+
     populate_items
     @items.each(&:update)
     @items.reject! {|item| item.y > WindowHeight }
@@ -53,10 +54,7 @@ class Window < Gosu::Window
   end
 
   def update_player
-    @player.go_left if Gosu::button_down?(Gosu::KbLeft)
-    @player.go_right if Gosu::button_down?(Gosu::KbRight)
-    @player.move
-    @player.collect(@items)
+    @player.update(@items)
     @game_over = true if @player.lives <= 0
   end
 

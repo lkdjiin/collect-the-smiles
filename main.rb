@@ -1,5 +1,6 @@
 require 'gosu'
 
+require_relative 'button'
 require_relative 'z_order'
 require_relative 'player'
 require_relative 'smiley'
