@@ -11,9 +11,8 @@ class Window < Gosu::Window
 
     @items = []
 
-    @song = Gosu::Song.new("assets/songs/Around the Bend.ogg")
-    @song.volume = 0.25
-    @song.play(true)
+    @song_player = SongPlayer.new
+    @song_player.play(Song::Level1)
 
     @game_over = false
   end
