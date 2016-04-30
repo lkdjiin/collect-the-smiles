@@ -8,4 +8,8 @@ module Button
     Gosu::button_down?(Gosu::KbRight)
   end
 
+  def self.space?
+    Gosu::button_down?(Gosu::KbSpace)
+  end
+
 end

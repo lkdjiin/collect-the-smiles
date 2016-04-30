@@ -59,6 +59,13 @@ class Player
     Gosu::milliseconds - @lost_life_at < LifeLostPause
   end
 
+  def reset
+    @score = 0
+    @lives = 3
+    @angle = 0.0
+    @velocity = 0.0
+  end
+
   private
 
   def collide?(item)

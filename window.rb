@@ -18,8 +18,11 @@ class Window < Gosu::Window
   end
 
   def update
+    reset if new_game?
+
     return if @game_over
 
+    update_game_over
     update_items
     update_player
   end
@@ -32,6 +35,10 @@ class Window < Gosu::Window
   end
 
   private
+
+  def new_game?
+    @game_over && Button.space?
+  end
 
   def update_items
     return if @player.just_lost_a_life?
@@ -54,7 +61,13 @@ class Window < Gosu::Window
 
   def update_player
     @player.update(@items)
-    @game_over = true if @player.lives <= 0
+  end
+
+  def update_game_over
+    return unless @player.lives <= 0
+
+    @game_over = true
+    @song_player.play(Song::GameOver)
   end
 
   def game_state
@@ -63,6 +76,13 @@ class Window < Gosu::Window
       lives: @player.lives,
       game_over: @game_over,
     }
+  end
+
+  def reset
+    @items = []
+    @player.reset
+    @song_player.play(Song::Level1)
+    @game_over = false
   end
 
 end
