@@ -1,12 +1,13 @@
 require 'gosu'
+require 'yaml'
 
 require_relative 'button'
 require_relative 'z_order'
 require_relative 'player'
 require_relative 'smiley'
 require_relative 'ui'
-require_relative 'song'
 require_relative 'song_player'
+require_relative 'level'
 require_relative 'window'
 
 WindowWidth  = 640

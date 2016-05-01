@@ -5,4 +5,8 @@ class SongPlayer
     @song.volume = 0.25
     @song.play(true)
   end
+
+  def play_game_over
+    play("assets/songs/In early time.ogg")
+  end
 end

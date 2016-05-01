@@ -11,8 +11,10 @@ class Window < Gosu::Window
 
     @items = []
 
+    @level = Level.new
+
     @song_player = SongPlayer.new
-    @song_player.play(Song::Level1)
+    @song_player.play(@level.song)
 
     @game_over = false
   end
@@ -67,7 +69,7 @@ class Window < Gosu::Window
     return unless @player.lives <= 0
 
     @game_over = true
-    @song_player.play(Song::GameOver)
+    @song_player.play_game_over
   end
 
   def game_state
@@ -81,7 +83,7 @@ class Window < Gosu::Window
   def reset
     @items = []
     @player.reset
-    @song_player.play(Song::Level1)
+    @song_player.play(@level.song)
     @game_over = false
   end
 
