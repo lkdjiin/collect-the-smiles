@@ -7,7 +7,7 @@ class Window < Gosu::Window
     @background_image = Gosu::Image.new("assets/images/background.png")
 
     @level = Level.new
-    @player = Player.new(@level)
+    @player = Player.new(CollectorProxy.new(@level))
     @ui = UI.new
 
     @items = []
