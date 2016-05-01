@@ -1,7 +1,15 @@
 class UI
   ScoreX = 10
   ScoreY = 10
-  ScoreColor = 0xff_ffff00
+
+  AchievedX = 0
+  AchievedY = 477
+  AchievedHeight = 3
+
+  LevelX = 550
+  LevelY = 10
+
+  Yellow = 0xff_ffff00
 
   LivesX = 10
   LivesXShift = 20
@@ -22,13 +30,13 @@ class UI
     draw_score(game[:score])
     draw_lives(game[:lives])
     draw_game_over if game[:game_over]
+    draw_level(game[:level])
   end
 
   private
 
   def draw_score(score)
-    @font.draw("Score: #{score}", ScoreX, ScoreY, ZOrder::UI, 1.0, 1.0,
-               ScoreColor)
+    @font.draw("Score: #{score}", ScoreX, ScoreY, ZOrder::UI, 1.0, 1.0, Yellow)
   end
 
   def draw_lives(number)
@@ -53,5 +61,17 @@ class UI
       @y_velocity = -@y_velocity
     end
     @y_velocity
+  end
+
+  def draw_level(level)
+    Gosu::draw_rect(AchievedX, AchievedY, achieved_part(level), AchievedHeight,
+                    Yellow, ZOrder::UI)
+
+    @font.draw("Level: #{level[:number]}", LevelX, LevelY, ZOrder::UI, 1.0, 1.0,
+               Yellow)
+  end
+
+  def achieved_part(level)
+    WindowWidth / level[:goal] * level[:collected]
   end
 end

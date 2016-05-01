@@ -13,4 +13,12 @@ class Level
   def collect
     @collected += 1
   end
+
+  def goal
+    @levels.first['goal']
+  end
+
+  def number
+    "1"
+  end
 end

@@ -76,6 +76,11 @@ class Window < Gosu::Window
       score: @player.score,
       lives: @player.lives,
       game_over: @game_over,
+      level: {
+        goal: @level.goal,
+        number: @level.number,
+        collected: @level.collected,
+      },
     }
   end
 
