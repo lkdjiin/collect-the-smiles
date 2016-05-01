@@ -6,12 +6,11 @@ class Window < Gosu::Window
 
     @background_image = Gosu::Image.new("assets/images/background.png")
 
-    @player = Player.new
+    @level = Level.new
+    @player = Player.new(@level)
     @ui = UI.new
 
     @items = []
-
-    @level = Level.new
 
     @song_player = SongPlayer.new
     @song_player.play(@level.song)

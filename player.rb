@@ -8,7 +8,7 @@ class Player
 
   attr_reader :score, :lives
 
-  def initialize
+  def initialize(level)
     @x = WindowHeight / 2
     @velocity = 0.0
     @image = Gosu::Image.new("assets/images/player.png")
@@ -23,6 +23,8 @@ class Player
     @lost_life_at = -20_000
 
     @angle = 0.0
+
+    @level = level
   end
 
   def update(items)
@@ -92,6 +94,7 @@ class Player
     when :smiley_up
       @score += 10
       @sound_collect.play(1.0)
+      @level.collect
     when :smiley_down
       @lives -= 1
       @sound_life_lost.play(1.0)
