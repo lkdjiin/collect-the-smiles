@@ -88,6 +88,7 @@ class Window < Gosu::Window
   def reset
     @items = []
     @player.reset
+    @level.reset
     @song_player.play(@level.song)
     @game_over = false
   end

@@ -33,6 +33,11 @@ class Level
     @collected = 0
   end
 
+  def reset
+    @collected = 0
+    @index = 0
+  end
+
   private
 
   def level
