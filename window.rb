@@ -20,6 +20,7 @@ class Window < Gosu::Window
 
   def update
     reset if new_game?
+    next_level if @level.completed?
 
     return if @game_over
 
@@ -89,6 +90,12 @@ class Window < Gosu::Window
     @player.reset
     @song_player.play(@level.song)
     @game_over = false
+  end
+
+  def next_level
+    @items = []
+    @level.next
+    @song_player.play(@level.song)
   end
 
 end
