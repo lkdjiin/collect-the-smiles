@@ -5,6 +5,7 @@ class Level
     @levels = YAML.load_file('levels.yaml')
     @collected = 0
     @index = 0
+    @sound_next_level = Gosu::Sample.new("assets/sound/next-level.wav")
   end
 
   def song
@@ -31,6 +32,7 @@ class Level
     @index += 1
     @index %= @levels.size
     @collected = 0
+    @sound_next_level.play
   end
 
   def reset
