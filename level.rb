@@ -3,13 +3,17 @@ class Level
 
   def initialize
     @levels = YAML.load_file('levels.yaml')
+    @sound_next_level = Gosu::Sample.new("assets/sound/next-level.wav")
+    reset
+  end
+
+  def reset
     @collected = 0
     @index = 0
-    @sound_next_level = Gosu::Sample.new("assets/sound/next-level.wav")
   end
 
   def song
-    level['song']
+    current 'song'
   end
 
   def collect
@@ -17,7 +21,7 @@ class Level
   end
 
   def goal
-    level['goal']
+    current 'goal'
   end
 
   def number
@@ -35,14 +39,9 @@ class Level
     @sound_next_level.play
   end
 
-  def reset
-    @collected = 0
-    @index = 0
-  end
-
   private
 
-  def level
-    @levels[@index]
+  def current(property)
+    @levels[@index][property]
   end
 end
